@@ -1,0 +1,12 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - echo "the build is starting & creating a mycode.zip file .."
+      - zip -r  mycode.zip  lambda_function.py 
+
+  post_build:
+    commands:
+      - echo "Now code build copy code to Lambda and we can execute function.."
+      - aws  lambda  update-function-code  --function-name mydevopsfunc  --zip-file fileb://mycode.zip
